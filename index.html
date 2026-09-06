@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NovaTech - Pakistan's Premium Electronics</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="Transfer.html"/>
+<style>
+:root{
+  --bg:#0a0a0f;
+  --surface:#13131a;
+  --card:#1a1a24;
+  --border:#ffffff12;
+  --accent:#00e5ff;
+  --accent2:#ff6b35;
+  --text:#f0f0f5;
+  --muted:#8888aa;
+  --radius:16px;
+  --glow:0 0 40px #00e5ff30;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:72px;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:.3s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-actions{display:flex;align-items:center;gap:1rem;}
+.cart-btn{
+  position:relative;background:none;border:1px solid var(--accent);
+  color:var(--accent);padding:.5rem 1.2rem;border-radius:50px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;transition:.3s;
+}
+.cart-btn:hover{background:var(--accent);color:var(--bg);}
+.cart-count{
+  position:absolute;top:-6px;right:-6px;background:var(--accent2);
+  color:#fff;font-size:.65rem;font-weight:700;border-radius:50%;
+  width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+}
+.transfer-btn{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:var(--bg);border:none;padding:.5rem 1.2rem;border-radius:50px;
+  cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;
+  transition:.3s;text-decoration:none;display:inline-block;
+}
+.transfer-btn:hover{opacity:.85;transform:translateY(-1px);}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:0 5%;
+  background:radial-gradient(ellipse 80% 60% at 60% 40%,#00e5ff10 0%,transparent 60%),
+             radial-gradient(ellipse 50% 40% at 20% 80%,#ff6b3510 0%,transparent 60%),
+             var(--bg);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
+}
+.hero-content{position:relative;z-index:1;max-width:700px;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--surface);border:1px solid var(--accent);
+  padding:.4rem 1rem;border-radius:50px;font-size:.8rem;color:var(--accent);
+  margin-bottom:1.5rem;animation:fadeUp .6s ease both;
+}
+.badge-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 1.5s infinite;}
+.hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:800;
+  line-height:1.05;margin-bottom:1.5rem;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{font-size:1.1rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;animation:fadeUp .8s .2s ease both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .3s ease both;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:var(--bg);border:none;padding:.85rem 2rem;border-radius:50px;
+  font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;
+  transition:.3s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--glow);}
+.btn-outline{
+  background:none;border:1px solid var(--border);color:var(--text);
+  padding:.85rem 2rem;border-radius:50px;font-family:'DM Sans',sans-serif;
+  font-size:1rem;cursor:pointer;transition:.3s;text-decoration:none;display:inline-block;
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+.hero-visual{
+  position:absolute;right:5%;top:50%;transform:translateY(-50%);
+  width:420px;height:420px;
+  background:radial-gradient(circle,#00e5ff18 0%,transparent 70%);
+  border-radius:50%;animation:float 6s ease-in-out infinite;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-ring{
+  width:320px;height:320px;border-radius:50%;
+  border:1px solid var(--accent);opacity:.3;
+  position:absolute;animation:spin 20s linear infinite;
+}
+.hero-ring:nth-child(2){width:240px;height:240px;border-color:var(--accent2);animation-duration:15s;animation-direction:reverse;}
+.hero-icon{font-size:6rem;animation:float 4s ease-in-out infinite;}
+
+/* SECTION COMMON */
+section{padding:5rem 5%;}
+.section-label{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;margin-bottom:.5rem;}
+.section-sub{color:var(--muted);margin-bottom:3rem;max-width:500px;}
+
+/* CATEGORIES */
+.categories{background:var(--surface);}
+.cat-grid{display:flex;gap:1rem;overflow-x:auto;padding-bottom:1rem;scrollbar-width:none;}
+.cat-grid::-webkit-scrollbar{display:none;}
+.cat-item{
+  flex:0 0 auto;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1rem 1.5rem;cursor:pointer;transition:.3s;
+  display:flex;align-items:center;gap:.75rem;white-space:nowrap;
+}
+.cat-item:hover,.cat-item.active{border-color:var(--accent);color:var(--accent);background:#00e5ff0a;}
+.cat-icon{font-size:1.4rem;}
+
+/* PRODUCTS */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1.5rem;
+}
+.product-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:.4s;cursor:pointer;
+  animation:fadeUp .5s ease both;
+}
+.product-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:var(--glow);}
+.product-img-wrap{
+  width:100%;height:200px;overflow:hidden;
+  background:linear-gradient(135deg,#1a1a2e,#0f0f1a);
+  display:flex;align-items:center;justify-content:center;
+  transition:.4s;
+}
+.product-img-wrap img{
+  width:100%;height:100%;object-fit:contain;
+  padding:1rem;transition:.4s;
+  filter:drop-shadow(0 4px 12px rgba(0,229,255,0.15));
+}
+.product-card:hover .product-img-wrap img{transform:scale(1.07);}
+.product-card:hover .product-img-wrap{background:linear-gradient(135deg,#1a1a2e,#0a0a1a);}
+.product-info{padding:1.25rem;}
+.product-brand{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.25rem;}
+.product-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+.product-desc{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:1rem;}
+.product-footer{display:flex;align-items:center;justify-content:space-between;}
+.product-price{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--accent);}
+.product-old{font-size:.8rem;color:var(--muted);text-decoration:line-through;margin-left:.3rem;}
+.add-cart{
+  background:var(--accent);color:var(--bg);border:none;border-radius:50px;
+  padding:.45rem 1.1rem;font-size:.82rem;font-weight:600;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:.3s;
+}
+.add-cart:hover{transform:scale(1.05);box-shadow:var(--glow);}
+.add-cart.added{background:var(--accent2);}
+.badge-new{
+  display:inline-block;background:var(--accent2);color:#fff;
+  font-size:.6rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;
+  margin-left:.5rem;vertical-align:middle;letter-spacing:.05em;
+}
+
+/* ABOUT */
+.about{
+  background:radial-gradient(ellipse 60% 80% at 80% 50%,#00e5ff08 0%,transparent 60%),
+             var(--surface);
+}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.about-visual{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  height:360px;
+}
+.about-circle{
+  width:260px;height:260px;border-radius:50%;
+  background:linear-gradient(135deg,#00e5ff18,#ff6b3518);
+  border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;
+  font-size:7rem;animation:float 5s ease-in-out infinite;
+}
+.stat-chip{
+  position:absolute;background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:.75rem 1.25rem;font-size:.82rem;
+}
+.stat-chip .stat-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--accent);}
+.stat-chip:nth-child(2){top:40px;right:20px;}
+.stat-chip:nth-child(3){bottom:40px;left:20px;}
+.about-content p{color:var(--muted);line-height:1.8;margin-bottom:1.5rem;}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.feature-list li{display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.9rem;}
+.feature-list li::before{content:'✦';color:var(--accent);font-size:.7rem;}
+
+/* CART SIDEBAR */
+.cart-overlay{
+  position:fixed;inset:0;background:#00000088;z-index:2000;
+  opacity:0;pointer-events:none;transition:.3s;
+}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-sidebar{
+  position:fixed;right:0;top:0;bottom:0;width:380px;max-width:100vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:2001;transform:translateX(100%);transition:.4s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+}
+.cart-sidebar.open{transform:translateX(0);}
+.cart-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem;border-bottom:1px solid var(--border);
+}
+.cart-header h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;}
+.close-cart{background:none;border:1px solid var(--border);color:var(--muted);
+  width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:.3s;}
+.close-cart:hover{border-color:var(--accent);color:var(--accent);}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem;}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:1rem;color:var(--muted);}
+.cart-empty span{font-size:4rem;}
+.cart-item{
+  display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:center;
+}
+.cart-item-icon{font-size:2.5rem;min-width:50px;text-align:center;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-weight:600;font-size:.9rem;margin-bottom:.2rem;}
+.cart-item-price{color:var(--accent);font-weight:700;font-size:.9rem;}
+.cart-item-qty{display:flex;align-items:center;gap:.5rem;margin-top:.4rem;}
+.qty-btn{background:var(--card);border:1px solid var(--border);color:var(--text);
+  width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:.9rem;transition:.3s;}
+.qty-btn:hover{border-color:var(--accent);color:var(--accent);}
+.qty-num{font-size:.85rem;min-width:20px;text-align:center;}
+.remove-item{background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:1rem;transition:.3s;padding:.2rem;}
+.remove-item:hover{color:#ff4444;}
+.cart-footer{padding:1.5rem;border-top:1px solid var(--border);}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.cart-total span:first-child{color:var(--muted);}
+.cart-total span:last-child{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--accent);}
+.checkout-btn{
+  width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:var(--bg);border:none;padding:1rem;border-radius:50px;
+  font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;
+  transition:.3s;text-decoration:none;display:block;text-align:center;
+}
+.checkout-btn:hover{opacity:.9;transform:translateY(-1px);}
+
+/* FOOTER */
+footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:4rem 5% 2rem;
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand .nav-logo{display:inline-block;margin-bottom:1rem;}
+.footer-brand p{color:var(--muted);font-size:.9rem;line-height:1.7;max-width:260px;}
+.footer-social{display:flex;gap:.75rem;margin-top:1.25rem;}
+.social-link{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;text-decoration:none;
+  color:var(--muted);font-size:.9rem;transition:.3s;
+}
+.social-link:hover{border-color:var(--accent);color:var(--accent);}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-col ul a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:.3s;}
+.footer-col ul a:hover{color:var(--accent);}
+.footer-contact p{color:var(--muted);font-size:.85rem;line-height:1.8;}
+.footer-contact span{color:var(--accent);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.8rem;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--card);border:1px solid var(--accent);color:var(--text);
+  padding:.75rem 1.5rem;border-radius:50px;font-size:.9rem;font-weight:500;
+  z-index:9999;transition:.4s cubic-bezier(.4,0,.2,1);white-space:nowrap;
+  box-shadow:var(--glow);
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;}
+  .about-visual{display:none;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .hero-visual{display:none;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .footer-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NovaTech⚡</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span></button>
+    <a href="transfer.html" class="transfer-btn">💳 Transfer</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span> Pakistan's #1 Electronics Store</div>
+    <h1><span>Electronics</span> Delivered in Pakistan</h1>
+    <p>Pakistan ka sab se bharosa mand electronics store. Premium gadgets, laptops aur smart devices — ghar bethay order karein. Cash on Delivery available!</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Shop Now →</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-icon">💻</div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="section-label">Browse</div>
+  <h2 class="section-title">Shop by Category</h2>
+  <div class="cat-grid">
+    <div class="cat-item active" onclick="filterProducts('all',this)"><span class="cat-icon">🔥</span>All</div>
+    <div class="cat-item" onclick="filterProducts('laptop',this)"><span class="cat-icon">💻</span>Laptops</div>
+    <div class="cat-item" onclick="filterProducts('phone',this)"><span class="cat-icon">📱</span>Phones</div>
+    <div class="cat-item" onclick="filterProducts('audio',this)"><span class="cat-icon">🎧</span>Audio</div>
+    <div class="cat-item" onclick="filterProducts('camera',this)"><span class="cat-icon">📷</span>Cameras</div>
+    <div class="cat-item" onclick="filterProducts('watch',this)"><span class="cat-icon">⌚</span>Wearables</div>
+    <div class="cat-item" onclick="filterProducts('tv',this)"><span class="cat-icon">📺</span>TVs</div>
+    <div class="cat-item" onclick="filterProducts('console',this)"><span class="cat-icon">🎮</span>Gaming</div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-label">Featured</div>
+  <h2 class="section-title">Our Products</h2>
+  <p class="section-sub">Pakistan mein free delivery on orders over Rs. 5,000. Cash on Delivery available nationwide.</p>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-circle">🚀</div>
+      <div class="stat-chip"><div class="stat-num">50K+</div><div>Happy Customers</div></div>
+      <div class="stat-chip"><div class="stat-num">500+</div><div>Products</div></div>
+    </div>
+    <div class="about-content">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">Powering Your Digital World</h2>
+      <p>NovaTech has been at the forefront of consumer electronics since 2015. We curate only the finest gadgets from world-renowned brands, ensuring every product meets our rigorous quality standards.</p>
+      <p>Our mission is simple: bring tomorrow's technology to your doorstep today, with unbeatable service and support.</p>
+      <ul class="feature-list">
+        <li>Genuine products with full warranty</li>
+        <li>Free express delivery on all orders</li>
+        <li>24/7 expert customer support</li>
+        <li>30-day hassle-free returns</li>
+        <li>Secure & encrypted payments</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">NovaTech⚡</div>
+      <p>Your trusted destination for premium electronics. Bringing the future to you, one device at a time.</p>
+      <div class="footer-social">
+        <a class="social-link" href="#">𝕏</a>
+        <a class="social-link" href="#">in</a>
+        <a class="social-link" href="#">ig</a>
+        <a class="social-link" href="#">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">Laptops</a></li>
+        <li><a href="#">Smartphones</a></li>
+        <li><a href="#">Audio</a></li>
+        <li><a href="#">Cameras</a></li>
+        <li><a href="#">Wearables</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Partners</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h4>Contact</h4>
+      <p><span>📍</span> Shop #14, Hafeez Centre, Lahore, Pakistan</p>
+      <br/>
+      <p><span>📞</span> +92 (300) 1234-567</p>
+      <br/>
+      <p><span>✉️</span> hello@novatech.pk</p>
+      <br/>
+      <p><span>🕐</span> Mon–Sat 10am–9pm PKT</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NovaTech. All rights reserved.</span>
+    <span>Privacy Policy · Terms · Cookies</span>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="close-cart" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span>🛒</span><p>Your cart is empty</p></div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <a href="transfer.html" class="checkout-btn" id="checkoutBtn">Proceed to Payment →</a>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const PRODUCTS = [
+  {id:1,name:'MacBook Pro 16"',brand:'Apple',img:'img/MacBook Pro 16.jpg',price:699000,old:749000,desc:'M3 Max chip, 36GB RAM, stunning Liquid Retina XDR display.',cat:'laptop',isNew:true},
+  {id:2,name:'Samsung Galaxy S25 Ultra',brand:'Samsung',img:'img/Samsung Galaxy S25 Ultra.jpg',price:319000,old:339000,desc:'200MP camera, 5000mAh battery, built-in S Pen. Official PTA Approved.',cat:'phone',isNew:true},
+  {id:3,name:'Sony WH-1000XM6',brand:'Sony',img:'img/Sony WH-1000XM6.png',price:89000,old:99000,desc:'Industry-leading ANC, 30-hour battery, Hi-Res Audio.',cat:'audio',isNew:false},
+  {id:4,name:'Canon EOS R5 Mark II',brand:'Canon',img:'img/Canon EOS R5 Mark II.jpg',price:1100000,old:1199000,desc:'45MP full-frame, 8K RAW video, IBIS stabilization.',cat:'camera',isNew:false},
+  {id:5,name:'Apple Watch Ultra 3',brand:'Apple',img:'img/Apple Watch Ultra 3.jpg',price:219000,old:239000,desc:'Alpine Loop, titanium case, dual-frequency GPS.',cat:'watch',isNew:true},
+  {id:6,name:'LG OLED evo C5 65"',brand:'LG',img:'img/LG OLED evo C5 65.webp',price:419000,old:479000,desc:'65" OLED, 4K 120Hz, Dolby Vision & Atmos, webOS.',cat:'tv',isNew:false},
+  {id:7,name:'PlayStation 5 Pro',brand:'Sony',img:'img/PlayStation 5 Pro.png',price:189000,old:199000,desc:'PlayStation Spectral Super Resolution, 8K gaming ready.',cat:'console',isNew:true},
+  {id:8,name:'iPad Pro 13" M4',brand:'Apple',img:'img/iPad Pro 13.webp',price:359000,old:389000,desc:'M4 chip, Ultra Retina XDR OLED, Apple Pencil Pro.',cat:'phone',isNew:false},
+  {id:9,name:'Dell XPS 15',brand:'Dell',img:'img/Dell XPS 15.jpg',price:489000,old:529000,desc:'Intel i9-14900H, RTX 4070, 2.8K OLED touchscreen.',cat:'laptop',isNew:false},
+  {id:10,name:'AirPods Pro 3',brand:'Apple',img:'img/AirPods Pro 3.jpg',price:79000,old:85000,desc:'Active Noise Cancellation, Adaptive Audio, USB-C.',cat:'audio',isNew:true},
+  {id:11,name:'GoPro HERO13 Black',brand:'GoPro',img:'img/GoPro HERO13 Black.jpg',price:109000,old:119000,desc:'5.3K60 video, HyperSmooth 7.0, waterproof to 33ft.',cat:'camera',isNew:false},
+  {id:12,name:'Samsung Galaxy Watch 7',brand:'Samsung',img:'img/Samsung Galaxy Watch 7.webp',price:89000,old:99000,desc:'Advanced health tracking, Exynos W1000, sapphire glass.',cat:'watch',isNew:false},
+];
+
+let cart = [];
+let activeFilter = 'all';
+
+function renderProducts(filter='all'){
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===filter);
+  grid.innerHTML = filtered.map((p,i)=>`
+    <div class="product-card" style="animation-delay:${i*0.07}s">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'font-size:4rem;padding:2rem\'>${p.emoji||'📦'}</div>'"/>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}${p.isNew?'<span class="badge-new">NEW</span>':''}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <div>
+            <span class="product-price">Rs. ${p.price.toLocaleString()}</span>
+            <span class="product-old">Rs. ${p.old.toLocaleString()}</span>
+          </div>
+          <button class="add-cart" id="btn-${p.id}" onclick="addToCart(${p.id})">+ Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, el){
+  activeFilter = cat;
+  document.querySelectorAll('.cat-item').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts(cat);
+}
+
+function addToCart(id){
+  const product = PRODUCTS.find(p=>p.id===id);
+  const existing = cart.find(c=>c.id===id);
+  if(existing) existing.qty++;
+  else cart.push({...product,qty:1});
+  updateCart();
+  showToast(`✅ ${product.name} added to cart!`);
+  const btn = document.getElementById(`btn-${id}`);
+  if(btn){btn.textContent='✓ Added';btn.classList.add('added');setTimeout(()=>{btn.textContent='+ Cart';btn.classList.remove('added');},1500);}
+}
+
+function removeFromCart(id){
+  cart = cart.filter(c=>c.id!==id);
+  updateCart();
+  renderCart();
+}
+
+function changeQty(id,delta){
+  const item = cart.find(c=>c.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0) removeFromCart(id);
+  else{updateCart();renderCart();}
+}
+
+function updateCart(){
+  const total = cart.reduce((s,c)=>s+c.price*c.qty,0);
+  document.getElementById('cartCount').textContent = cart.reduce((s,c)=>s+c.qty,0);
+  document.getElementById('cartTotal').textContent = 'Rs. '+total.toLocaleString();
+  renderCart();
+  localStorage.setItem('novaCart', JSON.stringify(cart));
+}
+
+function renderCart(){
+  const el = document.getElementById('cartItems');
+  if(!cart.length){
+    el.innerHTML='<div class="cart-empty"><span>🛒</span><p>Your cart is empty</p></div>';
+    return;
+  }
+  el.innerHTML = cart.map(c=>`
+    <div class="cart-item">
+      <div class="cart-item-icon">${c.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${c.name}</div>
+        <div class="cart-item-price">Rs. ${(c.price*c.qty).toLocaleString()}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${c.id},-1)">−</button>
+          <span class="qty-num">${c.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${c.id},1)">+</button>
+        </div>
+      </div>
+      <button class="remove-item" onclick="removeFromCart(${c.id})">🗑️</button>
+    </div>
+  `).join('');
+}
+
+function toggleCart(){
+  document.getElementById('cartSidebar').classList.toggle('open');
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// Load cart from storage
+try{const saved=localStorage.getItem('novaCart');if(saved){cart=JSON.parse(saved);updateCart();}}catch(e){}
+
+renderProducts();
+</script>
+</body>
+</html>
